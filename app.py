@@ -1,9 +1,12 @@
 from flask import Flask, jsonify
 
 from sudoku_solver import sudoku
+from routes import basic_routes, sudoku_routes
 
 app = Flask(__name__)
 
+app.register_blueprint(basic_routes.basic_routes)
+app.register_blueprint(sudoku_routes.sudoku_routes)
 
 @app.route("/")
 def index():
