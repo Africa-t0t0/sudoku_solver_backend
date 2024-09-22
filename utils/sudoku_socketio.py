@@ -25,14 +25,11 @@ class SudokuSocketIO(sudoku.Sudoku):
                 self._table_df.iloc[position_x, position_y] = 0
                 self._socketIO.emit("update", {"data" :self._table_df.to_json(orient="values")}, broadcast=True)
                 time.sleep(0.001)
-                print("emiting!")
                 self.print_table_realtime()
 
         return False
 
     def brute_force_socketio(self, socketio: SocketIO) -> bool:
-        print("background!")
-
         self._socketIO = socketio
         solution = self._basic_solution_socketio()
         self._socketIO.emit("completed", {"data": self._table_df.to_json(orient="values")})
